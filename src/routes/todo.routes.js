@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const Traillers = require('../models/todomodel')
+const ToDo = require('../models/todomodel')
 
 router.get('/todo', async (req, res) => {
-    const traillers = await Traillers.find();
-    res.json(traillers);
+    const toDo = await ToDo.find();
+    res.json(toDo);
 });
 
 router.get('/todo/:id', async (req, res) => {
-    const trailler = await Traillers.findById(req.params.id);
-    res.json(trailler);
+    const toDo = await ToDo.findById(req.params.id);
+    res.json(toDo);
 })
 
 router.post('/add-do', async (req, res) =>{
     const { tittle, description } = req.body;
-    const trailler = new Traillers({ tittle,   description });
+    const toDo = new ToDo({ tittle,   description });
     
     await trailler.save();
     res.json({status: "Tarea guardada" });  
@@ -22,15 +22,15 @@ router.post('/add-do', async (req, res) =>{
 
 router.put('/:id', async (req, res) => { 
     const { tittle, description } = req.body;
-    const newTrailler = { tittle, description };
+    const newToDo = { tittle, description };
 
-    await Traillers.findByIdAndUpdate(req.params.id, newTrailler);   
+    await ToDo.findByIdAndUpdate(req.params.id, newToDo);   
     res.json({ status: "Tarea actualizada" });
 });
 
 router.delete('/:id', async (req, res) =>{
-    await Traillers.findByIdAndRemove(req.params.id);
-    res.json({ status: "Tarea eliminado"});
+    await ToDo.findByIdAndRemove(req.params.id);
+    res.json({ status: "Tarea eliminada"});
 })
 
 module.exports = router;

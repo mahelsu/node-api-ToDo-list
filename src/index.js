@@ -17,12 +17,10 @@ app.use(cors({
 }));
 app.use(express.json()); 
 
-// dejame conectartelo por api 
-//Routes
+
 app.use('/', require('./routes/todo.routes'));
 
-//Static files
-// app.use(express.static(path.join(__dirname, 'public')));;
+
 
 //Starting the server
 app.listen(app.get('port'), () => {
